@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FinTrade — Market MYR</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    background:#060b11;
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+}
+
+.app{
+    width:min(100%,400px);
+    min-height:100vh;
+    background:#0b121b;
+    padding-bottom:76px;
+}
+
+/* HEADER */
+
+.header{
+    height:62px;
+    padding:0 15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #202c38;
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.back{
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:9px;
+    background:#17222e;
+    color:#fff;
+    font-size:19px;
+}
+
+.brand{
+    font-size:16px;
+    font-weight:800;
+}
+
+.brand span{
+    color:#19d39c;
+}
+
+.live{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    padding:6px 9px;
+    border-radius:20px;
+    background:#0e251e;
+    color:#19d39c;
+    font-size:9px;
+}
+
+.live-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#19d39c;
+}
+
+/* CONTENT */
+
+.content{
+    padding:15px;
+}
+
+/* MARKET HEADER */
+
+.market-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+.symbol{
+    font-size:23px;
+    font-weight:800;
+}
+
+.symbol-name{
+    margin-top:5px;
+    color:#718092;
+    font-size:10px;
+}
+
+.currency-box{
+    width:43px;
+    height:43px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:#172536;
+    border:1px solid #2a3b4d;
+    color:#19d39c;
+    font-weight:800;
+}
+
+/* PRICE */
+
+.price-area{
+    margin-top:17px;
+}
+
+.price{
+    font-size:29px;
+    font-weight:800;
+    letter-spacing:-.5px;
+}
+
+.change{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:6px;
+    font-size:10px;
+}
+
+.change-value{
+    color:#19d39c;
+    font-weight:bold;
+}
+
+.change-period{
+    color:#687688;
+}
+
+/* CHART */
+
+.chart-card{
+    height:390px;
+    margin-top:15px;
+    overflow:hidden;
+    border:1px solid #243342;
+    border-radius:14px;
+    background:#080e15;
+}
+
+.tradingview-widget-container{
+    width:100%;
+    height:100%;
+}
+
+/* TIMEFRAME */
+
+.timeframes{
+    display:flex;
+    gap:5px;
+    margin-top:9px;
+}
+
+.timeframes button{
+    flex:1;
+    height:30px;
+    border:1px solid #273646;
+    border-radius:7px;
+    background:#111b26;
+    color:#738194;
+    font-size:9px;
+}
+
+.timeframes button.active{
+    background:#19d39c;
+    color:#06130e;
+    border-color:#19d39c;
+    font-weight:bold;
+}
+
+/* MARKET DATA */
+
+.section{
+    margin-top:22px;
+}
+
+.section-title{
+    margin-bottom:10px;
+    font-size:14px;
+    font-weight:700;
+}
+
+.market-data{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.data-card{
+    padding:13px;
+    border:1px solid #253545;
+    border-radius:11px;
+    background:#101a25;
+}
+
+.data-label{
+    color:#718092;
+    font-size:9px;
+}
+
+.data-value{
+    margin-top:7px;
+    font-size:13px;
+    font-weight:700;
+}
+
+/* INSTRUMENTS */
+
+.instruments{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.instrument{
+    min-height:61px;
+    padding:10px 12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border:1px solid #253545;
+    border-radius:11px;
+    background:#101a25;
+    cursor:pointer;
+}
+
+.instrument:active{
+    transform:scale(.985);
+}
+
+.instrument-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.instrument-icon{
+    width:36px;
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:9px;
+    background:#172536;
+    color:#19d39c;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.instrument-name{
+    font-size:11px;
+    font-weight:bold;
+}
+
+.instrument-description{
+    margin-top:4px;
+    color:#6f7e90;
+    font-size:9px;
+}
+
+.instrument-arrow{
+    color:#657487;
+    font-size:17px;
+}
+
+/* FOOTER NAV */
+
+.nav{
+    position:fixed;
+    bottom:0;
+    width:min(100%,400px);
+    height:65px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    background:#0d161f;
+    border-top:1px solid #23313f;
+}
+
+.nav button{
+    min-width:60px;
+    border:0;
+    background:none;
+    color:#718092;
+    font-size:9px;
+}
+
+.nav-icon{
+    margin-bottom:4px;
+    font-size:18px;
+}
+
+.nav .active{
+    color:#19d39c;
+}
+
+@media(min-width:401px){
+
+    .app{
+        width:100%;
+        max-width:1200px;
+    }
+
+    .content{
+        max-width:900px;
+        margin:auto;
+    }
+
+    .nav{
+        width:100%;
+        max-width:1200px;
+    }
+
+    .chart-card{
+        height:520px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <div class="header-left">
+
+        <button
+            class="back"
+            onclick="go('interface.html')">
+            ←
+        </button>
+
+        <div class="brand">
+            FIN<span>TRADE</span>
+        </div>
+
+    </div>
+
+    <div class="live">
+        <span class="live-dot"></span>
+        LIVE
+    </div>
+
+</header>
+
+
+<main class="content">
+
+<!-- MARKET -->
+
+<div class="market-head">
+
+    <div>
+
+        <div class="symbol">
+            USD/MYR
+        </div>
+
+        <div class="symbol-name">
+            US Dollar / Malaysian Ringgit
+        </div>
+
+    </div>
+
+    <div class="currency-box">
+        MYR
+    </div>
+
+</div>
+
+
+<!-- PRICE -->
+
+<div class="price-area">
+
+    <div class="price">
+        USD / MYR
+    </div>
+
+    <div class="change">
+
+        <span class="change-value">
+            ● Market Live
+        </span>
+
+        <span class="change-period">
+            Real-time chart
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- TRADINGVIEW -->
+
+<div class="chart-card">
+
+    <div
+        class="tradingview-widget-container"
+        style="height:100%;width:100%;">
+
+        <div
+            class="tradingview-widget-container__widget"
+            style="height:100%;width:100%;">
+
+        </div>
+
+        <script
+            type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
+            async>
+
+        {
+            "autosize": true,
+            "symbol": "FX:USDMYR",
+            "interval": "15",
+            "timezone": "Asia/Kuala_Lumpur",
+            "theme": "dark",
+            "style": "1",
+            "locale": "id",
+            "enable_publishing": false,
+            "hide_top_toolbar": false,
+            "hide_legend": false,
+            "allow_symbol_change": true,
+            "save_image": false,
+            "calendar": false,
+            "withdateranges": true,
+            "hide_side_toolbar": false,
+            "support_host": "https://www.tradingview.com"
+        }
+
+        </script>
+
+    </div>
+
+</div>
+
+
+<!-- TIMEFRAME -->
+
+<div class="timeframes">
+
+    <button>1m</button>
+    <button>5m</button>
+    <button class="active">15m</button>
+    <button>1H</button>
+    <button>4H</button>
+    <button>1D</button>
+
+</div>
+
+
+<!-- MARKET DATA -->
+
+<div class="section">
+
+    <div class="section-title">
+        Market Overview
+    </div>
+
+    <div class="market-data">
+
+        <div class="data-card">
+            <div class="data-label">
+                INSTRUMEN
+            </div>
+            <div class="data-value">
+                USD/MYR
+            </div>
+        </div>
+
+        <div class="data-card">
+            <div class="data-label">
+                QUOTE
+            </div>
+            <div class="data-value">
+                MYR
+            </div>
+        </div>
+
+        <div class="data-card">
+            <div class="data-label">
+                MARKET
+            </div>
+            <div class="data-value">
+                Forex
+            </div>
+        </div>
+
+        <div class="data-card">
+            <div class="data-label">
+                STATUS
+            </div>
+            <div class="data-value" style="color:#19d39c">
+                Aktif
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PAIR -->
+
+<div class="section">
+
+    <div class="section-title">
+        Instrumen MYR
+    </div>
+
+    <div class="instruments">
+
+        <div
+            class="instrument"
+            onclick="openMarket('FX:USDMYR')">
+
+            <div class="instrument-left">
+
+                <div class="instrument-icon">
+                    USD
+                </div>
+
+                <div>
+
+                    <div class="instrument-name">
+                        USD / MYR
+                    </div>
+
+                    <div class="instrument-description">
+                        US Dollar / Ringgit Malaysia
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="instrument-arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <div
+            class="instrument"
+            onclick="openMarket('FX:EURMYR')">
+
+            <div class="instrument-left">
+
+                <div class="instrument-icon">
+                    EUR
+                </div>
+
+                <div>
+
+                    <div class="instrument-name">
+                        EUR / MYR
+                    </div>
+
+                    <div class="instrument-description">
+                        Euro / Ringgit Malaysia
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="instrument-arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <div
+            class="instrument"
+            onclick="openMarket('FX:GBPMYR')">
+
+            <div class="instrument-left">
+
+                <div class="instrument-icon">
+                    GBP
+                </div>
+
+                <div>
+
+                    <div class="instrument-name">
+                        GBP / MYR
+                    </div>
+
+                    <div class="instrument-description">
+                        Pound / Ringgit Malaysia
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="instrument-arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <div
+            class="instrument"
+            onclick="openMarket('FX:JPYMYR')">
+
+            <div class="instrument-left">
+
+                <div class="instrument-icon">
+                    JPY
+                </div>
+
+                <div>
+
+                    <div class="instrument-name">
+                        JPY / MYR
+                    </div>
+
+                    <div class="instrument-description">
+                        Yen / Ringgit Malaysia
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="instrument-arrow">
+                ›
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+
+
+<!-- NAVIGATION -->
+
+<nav class="nav">
+
+    <button onclick="go('interface.html')">
+
+        <div class="nav-icon">
+            ⌂
+        </div>
+
+        Beranda
+
+    </button>
+
+
+    <button class="active">
+
+        <div class="nav-icon">
+            ◉
+        </div>
+
+        Market
+
+    </button>
+
+
+    <button onclick="go('infstory.html')">
+
+        <div class="nav-icon">
+            ▣
+        </div>
+
+        Riwayat
+
+    </button>
+
+
+    <button onclick="go('profile.html')">
+
+        <div class="nav-icon">
+            👤
+        </div>
+
+        Profil
+
+    </button>
+
+</nav>
+
+</div>
+
+
+<script>
+
+function go(page){
+    window.location.href = page;
+}
+
+function openMarket(symbol){
+
+    window.location.href =
+        "infmarket.html?symbol=" +
+        encodeURIComponent(symbol);
+
+}
+
+</script>
+
+</body>
+</html>

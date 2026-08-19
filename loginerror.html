@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login Error - FinTrade</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+    background: #080d14;
+    color: #ffffff;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px;
+}
+
+/* MAIN */
+.error-page {
+    width: min(100%, 400px);
+}
+
+/* LOGO */
+.logo {
+    text-align: center;
+    font-size: 27px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.logo span {
+    color: #19d39c;
+}
+
+.subtitle {
+    text-align: center;
+    color: #758294;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+/* CARD */
+.error-card {
+    padding: 25px 20px;
+    border-radius: 18px;
+    background: #111a25;
+    border: 1px solid #293747;
+    text-align: center;
+}
+
+/* ICON */
+.error-icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #321d23;
+    border: 1px solid #69323d;
+
+    color: #ff6474;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+/* TEXT */
+.error-title {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.error-description {
+    margin-top: 10px;
+    color: #8794a5;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ERROR BOX */
+.error-message {
+    margin-top: 20px;
+    padding: 13px;
+
+    border-radius: 10px;
+
+    background: #21171b;
+    border: 1px solid #4b2931;
+
+    color: #d6aeb4;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* BUTTON */
+.retry-button {
+    width: 100%;
+    height: 48px;
+
+    margin-top: 20px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: #19d39c;
+    color: #07120f;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.retry-button:active {
+    transform: scale(.98);
+}
+
+.back-button {
+    width: 100%;
+    height: 45px;
+
+    margin-top: 9px;
+
+    border: 1px solid #293747;
+    border-radius: 10px;
+
+    background: #192533;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+/* SECURITY */
+.security {
+    margin-top: 18px;
+
+    text-align: center;
+
+    color: #536173;
+    font-size: 10px;
+}
+
+/* SMALL SCREEN */
+@media (max-width: 350px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .error-card {
+        padding: 22px 16px;
+    }
+
+    .error-icon {
+        width: 68px;
+        height: 68px;
+        font-size: 30px;
+    }
+
+    .error-title {
+        font-size: 19px;
+    }
+}
+
+/* LARGE SCREEN */
+@media (min-width: 401px) {
+
+    .error-page {
+        width: 400px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="error-page">
+
+    <!-- LOGO -->
+    <div class="logo">
+        FIN<span>TRADE</span>
+    </div>
+
+    <div class="subtitle">
+        Secure Financial Trading Platform
+    </div>
+
+
+    <!-- ERROR CARD -->
+    <div class="error-card">
+
+        <div class="error-icon">
+            !
+        </div>
+
+
+        <div class="error-title">
+            Login Gagal
+        </div>
+
+
+        <div class="error-description">
+            Kami tidak dapat memproses permintaan login
+            Anda saat ini.
+        </div>
+
+
+        <div class="error-message">
+            Username atau password yang dimasukkan
+            tidak valid. Silakan periksa kembali
+            informasi login Anda.
+        </div>
+
+
+        <button
+            class="retry-button"
+            onclick="retryLogin()">
+
+            COBA LOGIN KEMBALI
+
+        </button>
+
+
+        <button
+            class="back-button"
+            onclick="goBack()">
+
+            KEMBALI
+
+        </button>
+
+    </div>
+
+
+    <div class="security">
+        🔒 Secure Login • FinTrade
+    </div>
+
+</div>
+
+
+<script>
+
+function retryLogin() {
+
+    window.location.href = "index.html";
+
+}
+
+
+function goBack() {
+
+    if (history.length > 1) {
+
+        history.back();
+
+    } else {
+
+        window.location.href = "index.html";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

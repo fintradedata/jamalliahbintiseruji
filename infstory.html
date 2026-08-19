@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riwayat Dana - FinTrade</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#080d14;
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+
+.app{
+    width:min(100%,400px);
+    min-height:100vh;
+    margin:auto;
+    background:#0e1621;
+    padding-bottom:75px;
+}
+
+.header{
+    height:64px;
+    padding:0 16px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    border-bottom:1px solid #263342;
+}
+
+.back{
+    width:36px;
+    height:36px;
+    border:0;
+    border-radius:9px;
+    background:#1b2938;
+    color:#fff;
+    font-size:19px;
+    cursor:pointer;
+}
+
+.title{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.content{
+    padding:18px 16px;
+}
+
+.subtitle{
+    color:#7f8c9d;
+    font-size:12px;
+    line-height:1.5;
+}
+
+/* SUMMARY */
+
+.summary{
+    margin-top:18px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.summary-card{
+    padding:15px;
+    border-radius:12px;
+    background:#131e2a;
+    border:1px solid #29384a;
+}
+
+.summary-label{
+    color:#7f8c9d;
+    font-size:10px;
+}
+
+.summary-value{
+    margin-top:7px;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.in{
+    color:#19d39c;
+}
+
+.out{
+    color:#ff6474;
+}
+
+/* HISTORY */
+
+.section-title{
+    margin:24px 0 10px;
+    font-size:15px;
+    font-weight:bold;
+}
+
+.history{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.item{
+    padding:14px;
+    border-radius:12px;
+    background:#131e2a;
+    border:1px solid #29384a;
+    cursor:pointer;
+}
+
+.item:active{
+    transform:scale(.98);
+}
+
+.item-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.item-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.icon{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:18px;
+}
+
+.icon-in{
+    background:#12352d;
+    color:#19d39c;
+}
+
+.icon-out{
+    background:#352025;
+    color:#ff6474;
+}
+
+.item-name{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.item-date{
+    margin-top:4px;
+    color:#718092;
+    font-size:10px;
+}
+
+.amount{
+    font-size:13px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.item-status{
+    margin-top:11px;
+    padding-top:10px;
+    border-top:1px solid #222e3c;
+    display:flex;
+    justify-content:space-between;
+}
+
+.status-label{
+    color:#718092;
+    font-size:10px;
+}
+
+.status{
+    font-size:10px;
+    font-weight:bold;
+}
+
+.success{
+    color:#19d39c;
+}
+
+.cancelled{
+    color:#ff6474;
+}
+
+/* NAV */
+
+.nav{
+    position:fixed;
+    bottom:0;
+    width:min(100%,400px);
+    height:65px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    background:#101923;
+    border-top:1px solid #263342;
+}
+
+.nav button{
+    border:0;
+    background:none;
+    color:#758294;
+    cursor:pointer;
+    font-size:10px;
+}
+
+.nav-icon{
+    font-size:19px;
+    margin-bottom:4px;
+}
+
+.active{
+    color:#19d39c !important;
+}
+
+@media(min-width:401px){
+
+    .app{
+        width:100%;
+        max-width:1200px;
+    }
+
+    .nav{
+        width:100%;
+        max-width:1200px;
+    }
+
+    .content{
+        max-width:650px;
+        margin:auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <button class="back" onclick="goBack()">
+        ←
+    </button>
+
+    <div class="title">
+        Riwayat Dana
+    </div>
+
+</header>
+
+
+<main class="content">
+
+    <div class="subtitle">
+        Riwayat dana masuk dan dana keluar
+        dari rekening RDN.
+    </div>
+
+
+    <!-- RINGKASAN -->
+
+    <div class="summary">
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                DANA MASUK
+            </div>
+
+            <div class="summary-value in">
+                +MYR 1.008.015,12
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                DANA KELUAR
+            </div>
+
+            <div class="summary-value out">
+                -MYR 0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIWAYAT -->
+
+    <div class="section-title">
+        Aktivitas Terbaru
+    </div>
+
+
+    <div class="history">
+
+
+        <!-- DANA MASUK -->
+
+        <div
+            class="item"
+            onclick="detail(
+                'Dana Masuk',
+                '+Rp1.000.000',
+                '17 Agustus 2026',
+                'Berhasil'
+            )">
+
+            <div class="item-top">
+
+                <div class="item-left">
+
+                    <div class="icon icon-in">
+                        ↓
+                    </div>
+
+                    <div>
+
+                        <div class="item-name">
+                            Dana Masuk
+                        </div>
+
+                        <div class="item-date">
+                            19 Agustus 2026 16.07 PM
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="amount in">
+                    +MYR 1.008.015,12
+                </div>
+
+            </div>
+
+
+            <div class="item-status">
+
+                <div class="status-label">
+                    Status
+                </div>
+
+                <div class="status success">
+                    Berhasil
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DANA KELUAR
+
+        <div
+            class="item"
+            onclick="detail(
+                'Tarik Tabungan',
+                '-Rp500.000',
+                '16 Agustus 2026',
+                'Berhasil'
+            )">
+
+            <div class="item-top">
+
+                <div class="item-left">
+
+                    <div class="icon icon-out">
+                        ↑
+                    </div>
+
+                    <div>
+
+                        <div class="item-name">
+                            Tarik Tabungan
+                        </div>
+
+                        <div class="item-date">
+                            16 Agustus 2026
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="amount out">
+                    -Rp500.000
+                </div>
+
+            </div>
+
+
+            <div class="item-status">
+
+                <div class="status-label">
+                    Status
+                </div>
+
+                <div class="status success">
+                    Berhasil
+                </div>
+
+            </div>
+
+        </div>
+        
+         -->
+        
+
+
+        <!-- DANA MASUK
+
+        <div
+            class="item"
+            onclick="detail(
+                'Dana Masuk',
+                '+Rp1.000.000',
+                '15 Agustus 2026',
+                'Berhasil'
+            )">
+
+            <div class="item-top">
+
+                <div class="item-left">
+
+                    <div class="icon icon-in">
+                        ↓
+                    </div>
+
+                    <div>
+
+                        <div class="item-name">
+                            Dana Masuk
+                        </div>
+
+                        <div class="item-date">
+                            15 Agustus 2026
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="amount in">
+                    +Rp1.000.000
+                </div>
+
+            </div>
+
+
+            <div class="item-status">
+
+                <div class="status-label">
+                    Status
+                </div>
+
+                <div class="status success">
+                    Berhasil
+                </div>
+
+            </div>
+
+        </div>
+        
+         -->
+
+
+        <!-- DANA KELUAR DIBATALKAN
+
+        <div
+            class="item"
+            onclick="detail(
+                'Tarik Tabungan',
+                '-Rp1.000.000',
+                '13 Agustus 2026',
+                'Dibatalkan'
+            )">
+
+            <div class="item-top">
+
+                <div class="item-left">
+
+                    <div class="icon icon-out">
+                        ↑
+                    </div>
+
+                    <div>
+
+                        <div class="item-name">
+                            Tarik Tabungan
+                        </div>
+
+                        <div class="item-date">
+                            13 Agustus 2026
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="amount out">
+                    -Rp1.000.000
+                </div>
+
+            </div>
+
+
+            <div class="item-status">
+
+                <div class="status-label">
+                    Status
+                </div>
+
+                <div class="status cancelled">
+                    Dibatalkan
+                </div>
+
+            </div>
+
+        </div>
+        
+         -->
+        
+        
+
+    </div>
+
+</main>
+
+
+<!-- NAV -->
+
+<nav class="nav">
+
+    <button onclick="go('interface.html')">
+        <div class="nav-icon">⌂</div>
+        Beranda
+    </button>
+
+    <button onclick="go('withdrawal.html')">
+        <div class="nav-icon">↓</div>
+        Tarik
+    </button>
+
+    <button class="active">
+        <div class="nav-icon">▣</div>
+        Riwayat
+    </button>
+
+    <button onclick="go('profile.html')">
+        <div class="nav-icon">👤</div>
+        Profil
+    </button>
+
+</nav>
+
+</div>
+
+
+<script>
+
+function go(page){
+    window.location.href = page;
+}
+
+function goBack(){
+
+    if(history.length > 1){
+        history.back();
+    }else{
+        go('interface.html');
+    }
+
+}
+
+function detail(
+    type,
+    amount,
+    date,
+    status
+){
+
+    alert(
+        type +
+        "\n\n" +
+        "Jumlah: " + amount +
+        "\nTanggal: " + date +
+        "\nStatus: " + status
+    );
+
+}
+
+</script>
+
+</body>
+</html>

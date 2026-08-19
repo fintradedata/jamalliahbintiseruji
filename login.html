@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - FinTrade</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+    background: #0b0f17;
+    color: #fff;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-page {
+    width: min(100%, 400px);
+}
+
+.logo {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.logo span {
+    color: #19d39c;
+}
+
+.subtitle {
+    text-align: center;
+    color: #7f8b9c;
+    font-size: 13px;
+    margin-bottom: 28px;
+}
+
+.login-card {
+    background: #111a25;
+    border: 1px solid #253142;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.3);
+}
+
+.login-card h2 {
+    margin: 0 0 6px;
+    font-size: 21px;
+}
+
+.login-card p {
+    margin: 0 0 22px;
+    color: #7f8b9c;
+    font-size: 13px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #aab4c3;
+}
+
+.input-box {
+    position: relative;
+}
+
+input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #2a3748;
+    border-radius: 10px;
+    background: #0c141e;
+    color: #fff;
+    padding: 0 14px;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #19d39c;
+}
+
+.password-input {
+    padding-right: 50px;
+}
+
+.show-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 0;
+    color: #778497;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px 0 20px;
+    font-size: 12px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #8c98a8;
+}
+
+.remember input {
+    width: 14px;
+    height: 14px;
+}
+
+.forgot {
+    color: #19d39c;
+    text-decoration: none;
+}
+
+.login-btn {
+    width: 100%;
+    height: 50px;
+    border: 0;
+    border-radius: 10px;
+    background: #19d39c;
+    color: #07120f;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    filter: brightness(1.08);
+}
+
+.login-btn:active {
+    transform: scale(.99);
+}
+
+.message {
+    display: none;
+    margin-top: 15px;
+    padding: 11px;
+    border-radius: 8px;
+    background: #19251f;
+    color: #19d39c;
+    font-size: 12px;
+    text-align: center;
+}
+
+.register {
+    text-align: center;
+    margin-top: 22px;
+    color: #788596;
+    font-size: 12px;
+}
+
+.register a {
+    color: #19d39c;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.security {
+    text-align: center;
+    margin-top: 20px;
+    color: #566273;
+    font-size: 10px;
+}
+
+/* DI BAWAH 400PX */
+@media (max-width: 400px) {
+    body {
+        padding: 15px;
+    }
+
+    .login-card {
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+}
+
+/* LEBIH DARI 400PX */
+@media (min-width: 401px) {
+    .login-page {
+        width: 400px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-page">
+
+    <div class="logo">
+        FIN<span>TRADE</span>
+    </div>
+
+    <div class="subtitle">
+        Secure Financial Trading Platform
+    </div>
+
+    <div class="login-card">
+
+        <h2>Welcome Back</h2>
+        <p>Sign in untuk mengakses akun Anda.</p>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Masukkan username"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-box">
+
+                    <input
+                        class="password-input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Masukkan password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword()"
+                    >
+                        Lihat
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="options">
+
+            </div>
+
+            <button type="submit" class="login-btn">
+                LOGIN
+            </button>
+
+            <div class="message" id="message">
+                Demo login berhasil.
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div class="security">
+        🔒 Secure Login • Your information is protected
+    </div>
+
+</div>
+
+
+
+<script>
+
+function togglePassword(){
+
+    const password =
+        document.getElementById("password");
+
+    const button =
+        document.querySelector(".show-password");
+
+
+    if(password.type === "password"){
+
+        password.type = "text";
+        button.textContent = "Sembunyikan";
+
+    }else{
+
+        password.type = "password";
+        button.textContent = "Lihat";
+
+    }
+
+}
+
+
+/*
+========================================
+LOGIN
+========================================
+*/
+
+document
+.getElementById("loginForm")
+.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+
+    const username =
+        document
+        .getElementById("username")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("password")
+        .value
+        .trim();
+
+
+    /*
+    ========================================
+    VALIDASI LOGIN DEMO
+    ========================================
+    
+    Username : demo
+    Password : 123456
+    */
+
+    const validUsername = "user9004781";
+    const validPassword = "@MKV99JTMYR";
+
+
+    /*
+    ========================================
+    LOGIN BERHASIL
+    ========================================
+    */
+
+    if(
+        username === validUsername &&
+        password === validPassword
+    ){
+
+        localStorage.setItem(
+            "fintrade_logged_in",
+            "true"
+        );
+
+
+        localStorage.setItem(
+            "fintrade_username",
+            username
+        );
+
+
+        /*
+        Masuk ke interface utama
+        */
+
+        window.location.replace(
+            "interface.html"
+        );
+
+        return;
+    }
+
+
+    /*
+    ========================================
+    LOGIN GAGAL
+    ========================================
+    */
+
+    localStorage.removeItem(
+        "fintrade_logged_in"
+    );
+
+
+    /*
+    Simpan informasi percobaan login
+    untuk ditampilkan di loginerror.html
+    */
+
+    localStorage.setItem(
+        "login_error",
+        "Username atau password yang Anda masukkan salah."
+    );
+
+
+    localStorage.setItem(
+        "login_error_time",
+        new Date().toLocaleString("id-ID")
+    );
+
+
+    /*
+    Masuk ke halaman error
+    */
+
+    window.location.replace(
+        "loginerror.html"
+    );
+
+});
+
+</script>
+
+</body>
+</html>

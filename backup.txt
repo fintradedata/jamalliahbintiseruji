@@ -1,0 +1,2473 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - FinTrade</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+    background: #0b0f17;
+    color: #fff;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-page {
+    width: min(100%, 400px);
+}
+
+.logo {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.logo span {
+    color: #19d39c;
+}
+
+.subtitle {
+    text-align: center;
+    color: #7f8b9c;
+    font-size: 13px;
+    margin-bottom: 28px;
+}
+
+.login-card {
+    background: #111a25;
+    border: 1px solid #253142;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.3);
+}
+
+.login-card h2 {
+    margin: 0 0 6px;
+    font-size: 21px;
+}
+
+.login-card p {
+    margin: 0 0 22px;
+    color: #7f8b9c;
+    font-size: 13px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #aab4c3;
+}
+
+.input-box {
+    position: relative;
+}
+
+input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #2a3748;
+    border-radius: 10px;
+    background: #0c141e;
+    color: #fff;
+    padding: 0 14px;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #19d39c;
+}
+
+.password-input {
+    padding-right: 50px;
+}
+
+.show-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 0;
+    color: #778497;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px 0 20px;
+    font-size: 12px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #8c98a8;
+}
+
+.remember input {
+    width: 14px;
+    height: 14px;
+}
+
+.forgot {
+    color: #19d39c;
+    text-decoration: none;
+}
+
+.login-btn {
+    width: 100%;
+    height: 50px;
+    border: 0;
+    border-radius: 10px;
+    background: #19d39c;
+    color: #07120f;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    filter: brightness(1.08);
+}
+
+.login-btn:active {
+    transform: scale(.99);
+}
+
+.message {
+    display: none;
+    margin-top: 15px;
+    padding: 11px;
+    border-radius: 8px;
+    background: #19251f;
+    color: #19d39c;
+    font-size: 12px;
+    text-align: center;
+}
+
+.register {
+    text-align: center;
+    margin-top: 22px;
+    color: #788596;
+    font-size: 12px;
+}
+
+.register a {
+    color: #19d39c;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.security {
+    text-align: center;
+    margin-top: 20px;
+    color: #566273;
+    font-size: 10px;
+}
+
+/* DI BAWAH 400PX */
+@media (max-width: 400px) {
+    body {
+        padding: 15px;
+    }
+
+    .login-card {
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+}
+
+/* LEBIH DARI 400PX */
+@media (min-width: 401px) {
+    .login-page {
+        width: 400px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-page">
+
+    <div class="logo">
+        FIN<span>TRADE</span>
+    </div>
+
+    <div class="subtitle">
+        Secure Financial Trading Platform
+    </div>
+
+    <div class="login-card">
+
+        <h2>Welcome Back</h2>
+        <p>Sign in untuk mengakses akun Anda.</p>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Masukkan username"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-box">
+
+                    <input
+                        class="password-input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Masukkan password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword()"
+                    >
+                        Lihat
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="options">
+
+                <label class="remember">
+                    <input type="checkbox">
+                    Ingat saya
+                </label>
+
+                <a href="#" class="forgot">
+                    Lupa password?
+                </a>
+
+            </div>
+
+            <button type="submit" class="login-btn">
+                LOGIN
+            </button>
+
+            <div class="message" id="message">
+                Demo login berhasil.
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="register">
+        Belum memiliki akun?
+        <a href="#">Daftar sekarang</a>
+    </div>
+
+    <div class="security">
+        🔒 Secure Login • Your information is protected
+    </div>
+
+</div>
+
+
+<script>
+
+function togglePassword() {
+
+    const password = document.getElementById("password");
+    const button = document.querySelector(".show-password");
+
+    if (password.type === "password") {
+        password.type = "text";
+        button.textContent = "Sembunyikan";
+    } else {
+        password.type = "password";
+        button.textContent = "Lihat";
+    }
+}
+
+
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if (username && password) {
+
+        document.getElementById("message").style.display = "block";
+
+        /*
+          Demo saja.
+          Untuk login sungguhan, validasi username/password
+          harus dilakukan di server/backend.
+        */
+
+        console.log("Username:", username);
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinTrade Dashboard</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html,body {
+    margin: 0;
+    min-height: 100%;
+    font-family: Arial,sans-serif;
+    background: #080d14;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: min(100%,400px);
+    min-height: 100vh;
+    background: #0e1621;
+    padding-bottom: 78px;
+}
+
+/* HEADER */
+.header {
+    height: 64px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #202c3a;
+}
+
+.logo {
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #18d39a;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #1b2938;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CONTENT */
+.content {
+    padding: 16px;
+}
+
+.greeting {
+    color: #8996a7;
+    font-size: 12px;
+}
+
+.username {
+    margin-top: 4px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* BALANCE */
+.balance-card {
+    margin-top: 18px;
+    padding: 20px;
+    border-radius: 17px;
+    background: linear-gradient(145deg,#172536,#101923);
+    border: 1px solid #273647;
+}
+
+.balance-title {
+    color: #8996a7;
+    font-size: 12px;
+}
+
+.balance {
+    margin-top: 8px;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.balance-profit {
+    margin-top: 8px;
+    color: #18d39a;
+    font-size: 12px;
+}
+
+/* ACTION */
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 13px;
+}
+
+.action {
+    padding: 15px 10px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #29384a;
+    background: #141f2b;
+}
+
+.action-icon {
+    font-size: 22px;
+    margin-bottom: 7px;
+}
+
+.action-title {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.action-subtitle {
+    margin-top: 4px;
+    color: #7c8999;
+    font-size: 10px;
+}
+
+.action.deposit .action-icon {
+    color: #18d39a;
+}
+
+.action.withdraw .action-icon {
+    color: #ff6474;
+}
+
+/* STATS */
+.section-title {
+    margin: 24px 0 12px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.stat {
+    background: #131e2a;
+    border: 1px solid #263545;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.stat-label {
+    color: #7e8a9b;
+    font-size: 11px;
+}
+
+.stat-value {
+    margin-top: 7px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* TRANSACTIONS */
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #202c39;
+}
+
+.transaction-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.transaction-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #172433;
+}
+
+.transaction-name {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.transaction-date {
+    margin-top: 4px;
+    color: #707e90;
+    font-size: 10px;
+}
+
+.transaction-amount {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.plus {
+    color: #18d39a;
+}
+
+.minus {
+    color: #ff6474;
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 20;
+}
+
+.modal-box {
+    width: min(100%,400px);
+    background: #121c28;
+    border-radius: 20px 20px 0 0;
+    padding: 22px;
+}
+
+.modal-box h3 {
+    margin: 0 0 5px;
+}
+
+.modal-box p {
+    color: #7f8b9b;
+    font-size: 12px;
+}
+
+.modal-box input {
+    width: 100%;
+    height: 48px;
+    margin: 12px 0;
+    padding: 0 14px;
+    border-radius: 10px;
+    border: 1px solid #2a394a;
+    background: #0b121b;
+    color: white;
+    outline: none;
+}
+
+.confirm {
+    width: 100%;
+    height: 48px;
+    border: 0;
+    border-radius: 10px;
+    background: #18d39a;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.close {
+    width: 100%;
+    height: 42px;
+    margin-top: 8px;
+    border: 0;
+    border-radius: 10px;
+    background: #202b39;
+    color: white;
+}
+
+/* NAVIGATION */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: min(100%,400px);
+    height: 65px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #101923;
+    border-top: 1px solid #243140;
+}
+
+.nav {
+    text-align: center;
+    color: #728092;
+    font-size: 10px;
+}
+
+.nav-icon {
+    font-size: 19px;
+    margin-bottom: 4px;
+}
+
+.nav.active {
+    color: #18d39a;
+}
+
+@media(min-width:401px) {
+    .app {
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .bottom-nav {
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .content {
+        max-width: 900px;
+        margin: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+    <div class="logo">FIN<span>TRADE</span></div>
+    <div class="avatar">👤</div>
+</header>
+
+<main class="content">
+
+<div class="greeting">Selamat datang kembali</div>
+<div class="username">Demo User</div>
+
+<!-- SALDO -->
+<div class="balance-card">
+    <div class="balance-title">TOTAL SALDO</div>
+
+    <div class="balance" id="balance">
+        $24,580.42
+    </div>
+
+    <div class="balance-profit">
+        ▲ +$1,248.32 hari ini
+    </div>
+</div>
+
+<!-- PENYIMPANAN & PENARIKAN -->
+<div class="actions">
+
+    <div class="action deposit" onclick="openModal('deposit')">
+        <div class="action-icon">＋</div>
+        <div class="action-title">Penyimpanan</div>
+        <div class="action-subtitle">Tambah saldo</div>
+    </div>
+
+    <div class="action withdraw" onclick="openModal('withdraw')">
+        <div class="action-icon">−</div>
+        <div class="action-title">Penarikan</div>
+        <div class="action-subtitle">Tarik saldo</div>
+    </div>
+
+</div>
+
+<!-- STATISTIK -->
+<div class="section-title">Ringkasan Akun</div>
+
+<div class="stats">
+
+    <div class="stat">
+        <div class="stat-label">Dana Tersedia</div>
+        <div class="stat-value">$18,420.20</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-label">Dana Tersimpan</div>
+        <div class="stat-value">$6,160.22</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-label">Profit</div>
+        <div class="stat-value plus">+$1,248.32</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-label">Investasi</div>
+        <div class="stat-value">$12,800.00</div>
+    </div>
+
+</div>
+
+<!-- RIWAYAT -->
+<div class="section-title">Aktivitas Terbaru</div>
+
+<div class="transaction">
+
+    <div class="transaction-left">
+        <div class="transaction-icon">↓</div>
+
+        <div>
+            <div class="transaction-name">
+                Penyimpanan
+            </div>
+
+            <div class="transaction-date">
+                17 Agustus 2026
+            </div>
+        </div>
+    </div>
+
+    <div class="transaction-amount plus">
+        +$2,000.00
+    </div>
+
+</div>
+
+<div class="transaction">
+
+    <div class="transaction-left">
+        <div class="transaction-icon">↑</div>
+
+        <div>
+            <div class="transaction-name">
+                Penarikan
+            </div>
+
+            <div class="transaction-date">
+                15 Agustus 2026
+            </div>
+        </div>
+    </div>
+
+    <div class="transaction-amount minus">
+        -$500.00
+    </div>
+
+</div>
+
+<div class="transaction">
+
+    <div class="transaction-left">
+        <div class="transaction-icon">↗</div>
+
+        <div>
+            <div class="transaction-name">
+                Profit Trading
+            </div>
+
+            <div class="transaction-date">
+                14 Agustus 2026
+            </div>
+        </div>
+    </div>
+
+    <div class="transaction-amount plus">
+        +$328.40
+    </div>
+
+</div>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+
+    <div class="nav active">
+        <div class="nav-icon">⌂</div>
+        Home
+    </div>
+
+    <div class="nav">
+        <div class="nav-icon">◉</div>
+        Markets
+    </div>
+
+    <div class="nav">
+        <div class="nav-icon">⇄</div>
+        Trade
+    </div>
+
+    <div class="nav">
+        <div class="nav-icon">▣</div>
+        Riwayat
+    </div>
+
+    <div class="nav">
+        <div class="nav-icon">⚙</div>
+        Akun
+    </div>
+
+</nav>
+
+</div>
+
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <h3 id="modalTitle">
+            Penyimpanan
+        </h3>
+
+        <p id="modalDescription">
+            Masukkan jumlah dana.
+        </p>
+
+        <input
+            type="number"
+            id="amount"
+            placeholder="Contoh: 1000"
+        >
+
+        <button class="confirm" onclick="processAction()">
+            Lanjutkan
+        </button>
+
+        <button class="close" onclick="closeModal()">
+            Batal
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let actionType = "";
+
+function openModal(type) {
+
+    actionType = type;
+
+    const modal = document.getElementById("modal");
+    const title = document.getElementById("modalTitle");
+    const description = document.getElementById("modalDescription");
+
+    if(type === "deposit") {
+
+        title.textContent = "Penyimpanan Dana";
+        description.textContent =
+            "Masukkan jumlah dana yang ingin disimpan.";
+
+    } else {
+
+        title.textContent = "Penarikan Dana";
+        description.textContent =
+            "Masukkan jumlah dana yang ingin ditarik.";
+
+    }
+
+    modal.style.display = "flex";
+}
+
+function closeModal() {
+
+    document.getElementById("modal").style.display = "none";
+
+    document.getElementById("amount").value = "";
+}
+
+function processAction() {
+
+    const amount =
+        document.getElementById("amount").value;
+
+    if(!amount || Number(amount) <= 0) {
+
+        alert("Masukkan jumlah yang valid.");
+        return;
+
+    }
+
+    if(actionType === "deposit") {
+
+        alert(
+            "Demo: permintaan penyimpanan sebesar $" +
+            Number(amount).toLocaleString() +
+            " dibuat."
+        );
+
+    } else {
+
+        alert(
+            "Demo: permintaan penarikan sebesar $" +
+            Number(amount).toLocaleString() +
+            " dibuat."
+        );
+
+    }
+
+    closeModal();
+}
+
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Module</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    background:#080d14;
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+
+.profile-page{
+    width:min(100%,400px);
+    min-height:100vh;
+    margin:auto;
+    background:#0e1621;
+}
+
+/* HEADER */
+.profile-header{
+    height:64px;
+    padding:0 16px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    border-bottom:1px solid #243140;
+}
+
+.back{
+    width:36px;
+    height:36px;
+    border:0;
+    border-radius:9px;
+    background:#192533;
+    color:#fff;
+    font-size:21px;
+    cursor:pointer;
+}
+
+.title{
+    font-size:18px;
+    font-weight:700;
+}
+
+/* CONTENT */
+.profile-content{
+    padding:20px 16px 35px;
+}
+
+.profile-main{
+    text-align:center;
+    padding:10px 0 25px;
+}
+
+.avatar{
+    width:82px;
+    height:82px;
+    margin:auto;
+    border-radius:50%;
+    background:linear-gradient(145deg,#19d39c,#087b60);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:27px;
+    font-weight:800;
+}
+
+.name{
+    margin-top:13px;
+    font-size:20px;
+    font-weight:700;
+}
+
+.username{
+    margin-top:5px;
+    color:#7d8999;
+    font-size:12px;
+}
+
+.verified{
+    display:inline-block;
+    margin-top:10px;
+    padding:5px 11px;
+    border-radius:20px;
+    background:#12382f;
+    color:#19d39c;
+    font-size:10px;
+    font-weight:700;
+}
+
+/* CARD */
+.card{
+    margin-bottom:14px;
+    border:1px solid #263545;
+    border-radius:14px;
+    background:#131e2a;
+    overflow:hidden;
+}
+
+.card-title{
+    padding:15px;
+    color:#8996a7;
+    font-size:11px;
+    font-weight:700;
+}
+
+.item{
+    width:100%;
+    min-height:58px;
+    padding:10px 15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border:0;
+    border-top:1px solid #222e3c;
+    background:transparent;
+    color:#fff;
+    text-align:left;
+    cursor:pointer;
+}
+
+.item:hover{
+    background:#182431;
+}
+
+.item-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.icon{
+    width:36px;
+    height:36px;
+    border-radius:9px;
+    background:#1b2938;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:17px;
+}
+
+.item-name{
+    font-size:13px;
+    font-weight:600;
+}
+
+.item-info{
+    margin-top:4px;
+    color:#718093;
+    font-size:10px;
+}
+
+.arrow{
+    color:#687688;
+    font-size:19px;
+}
+
+/* BALANCE */
+.balance{
+    padding:17px 15px;
+    border-top:1px solid #222e3c;
+}
+
+.balance-label{
+    color:#7e8b9b;
+    font-size:10px;
+}
+
+.balance-value{
+    margin-top:6px;
+    font-size:22px;
+    font-weight:800;
+}
+
+.profit{
+    margin-top:5px;
+    color:#19d39c;
+    font-size:11px;
+}
+
+/* LOGOUT */
+.logout{
+    width:100%;
+    height:48px;
+    margin-top:6px;
+    border:1px solid #542a32;
+    border-radius:10px;
+    background:#21151a;
+    color:#ff6575;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:rgba(0,0,0,.72);
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.modal-box{
+    width:min(100%,400px);
+    max-height:85vh;
+    overflow-y:auto;
+    padding:22px;
+    background:#121c28;
+    border-radius:20px 20px 0 0;
+    border:1px solid #293747;
+}
+
+.modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.modal-title{
+    font-size:18px;
+    font-weight:700;
+}
+
+.close{
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:8px;
+    background:#202c3a;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.modal-text{
+    color:#8996a7;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.info-box{
+    margin-top:12px;
+    padding:14px;
+    border-radius:10px;
+    background:#0c141e;
+    border:1px solid #253344;
+}
+
+.info-label{
+    color:#738194;
+    font-size:10px;
+}
+
+.info-value{
+    margin-top:5px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.modal-button{
+    width:100%;
+    height:46px;
+    margin-top:14px;
+    border:0;
+    border-radius:10px;
+    background:#19d39c;
+    color:#07120f;
+    font-weight:700;
+    cursor:pointer;
+}
+
+@media(min-width:401px){
+
+    .profile-page{
+        width:100%;
+        max-width:1200px;
+    }
+
+    .profile-content{
+        width:500px;
+        max-width:100%;
+        margin:auto;
+    }
+
+    .modal-box{
+        margin-bottom:0;
+    }
+}
+
+@media(max-width:350px){
+
+    .profile-content{
+        padding:16px 12px 30px;
+    }
+
+    .avatar{
+        width:72px;
+        height:72px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="profile-page">
+
+<header class="profile-header">
+
+    <button class="back" onclick="goBack()">
+        ←
+    </button>
+
+    <div class="title">
+        Profil Saya
+    </div>
+
+</header>
+
+
+<main class="profile-content">
+
+<!-- PROFILE -->
+<section class="profile-main">
+
+    <div class="avatar">
+        DU
+    </div>
+
+    <div class="name">
+        Demo User
+    </div>
+
+    <div class="username">
+        @demouser
+    </div>
+
+    <div class="verified">
+        ✓ AKUN TERVERIFIKASI
+    </div>
+
+</section>
+
+
+<!-- AKUN -->
+<section class="card">
+
+<div class="card-title">
+    INFORMASI AKUN
+</div>
+
+
+<button class="item" onclick="openMenu('personal')">
+
+    <div class="item-left">
+        <div class="icon">👤</div>
+
+        <div>
+            <div class="item-name">
+                Informasi Pribadi
+            </div>
+
+            <div class="item-info">
+                Kelola informasi akun
+            </div>
+        </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+</button>
+
+
+<button class="item" onclick="openMenu('security')">
+
+    <div class="item-left">
+        <div class="icon">🔒</div>
+
+        <div>
+            <div class="item-name">
+                Keamanan
+            </div>
+
+            <div class="item-info">
+                Password & autentikasi
+            </div>
+        </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+</button>
+
+
+<button class="item" onclick="openMenu('verification')">
+
+    <div class="item-left">
+        <div class="icon">🛡️</div>
+
+        <div>
+            <div class="item-name">
+                Verifikasi Identitas
+            </div>
+
+            <div class="item-info">
+                Status verifikasi akun
+            </div>
+        </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+</button>
+
+</section>
+
+
+<!-- KEUANGAN -->
+<section class="card">
+
+<div class="card-title">
+    KEUANGAN
+</div>
+
+
+<button class="item" onclick="openMenu('balance')">
+
+    <div class="item-left">
+        <div class="icon">💰</div>
+
+        <div>
+            <div class="item-name">
+                Saldo
+            </div>
+
+            <div class="item-info">
+                $24,580.42
+            </div>
+        </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+</button>
+
+
+<button class="item" onclick="openMenu('payment')">
+
+    <div class="item-left">
+        <div class="icon">💳</div>
+
+        <div>
+            <div class="item-name">
+                Metode Pembayaran
+            </div>
+
+            <div class="item-info">
+                Kelola metode pembayaran
+            </div>
+        </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+</button>
+
+
+<button class="item" onclick="openMenu('history')">
+
+    <div class="item-left">
+        <div class="icon">📋</div>
+
+        <div>
+            <div class="item-name">
+                Riwayat Transaksi
+            </div>
+
+            <div class="item-info">
+                Lihat aktivitas akun
+            </div>
+        </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+</button>
+
+</section>
+
+
+<!-- PENGATURAN -->
+<section class="card">
+
+<div class="card-title">
+    PENGATURAN
+</div>
+
+
+<button class="item" onclick="openMenu('notification')">
+
+    <div class="item-left">
+        <div class="icon">🔔</div>
+
+        <div>
+            <div class="item-name">
+                Notifikasi
+            </div>
+
+            <div class="item-info">
+                Atur pemberitahuan
+            </div>
+        </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+</button>
+
+
+<button class="item" onclick="openMenu('language')">
+
+    <div class="item-left">
+        <div class="icon">🌐</div>
+
+        <div>
+            <div class="item-name">
+                Bahasa
+            </div>
+
+            <div class="item-info">
+                Bahasa Indonesia
+            </div>
+        </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+</button>
+
+</section>
+
+
+<button class="logout" onclick="logout()">
+    KELUAR DARI AKUN
+</button>
+
+</main>
+
+</div>
+
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+    <div class="modal-head">
+
+        <div class="modal-title" id="modalTitle">
+            Menu
+        </div>
+
+        <button class="close" onclick="closeMenu()">
+            ×
+        </button>
+
+    </div>
+
+    <div class="modal-text" id="modalContent">
+        Informasi menu.
+    </div>
+
+    <button class="modal-button" onclick="closeMenu()">
+        SELESAI
+    </button>
+
+</div>
+
+</div>
+
+
+<script>
+
+const menuData = {
+
+personal: {
+    title:"Informasi Pribadi",
+    content:`
+        <div class="info-box">
+            <div class="info-label">Nama</div>
+            <div class="info-value">Demo User</div>
+        </div>
+
+        <div class="info-box">
+            <div class="info-label">Username</div>
+            <div class="info-value">@demouser</div>
+        </div>
+
+        <div class="info-box">
+            <div class="info-label">Status</div>
+            <div class="info-value">Akun Terverifikasi</div>
+        </div>
+    `
+},
+
+security: {
+    title:"Keamanan",
+    content:`
+        <div class="info-box">
+            <div class="info-label">Password</div>
+            <div class="info-value">••••••••</div>
+        </div>
+
+        <div class="info-box">
+            <div class="info-label">Autentikasi</div>
+            <div class="info-value">Aktif</div>
+        </div>
+    `
+},
+
+verification: {
+    title:"Verifikasi Identitas",
+    content:`
+        <div class="info-box">
+            <div class="info-label">Status</div>
+            <div class="info-value">✓ Terverifikasi</div>
+        </div>
+    `
+},
+
+balance: {
+    title:"Saldo",
+    content:`
+        <div class="info-box">
+            <div class="info-label">Total Saldo</div>
+            <div class="info-value">$24,580.42</div>
+        </div>
+
+        <div class="info-box">
+            <div class="info-label">Profit</div>
+            <div class="info-value">+$1,248.32</div>
+        </div>
+    `
+},
+
+payment: {
+    title:"Metode Pembayaran",
+    content:`
+        <div class="info-box">
+            <div class="info-label">Metode</div>
+            <div class="info-value">Belum ditambahkan</div>
+        </div>
+    `
+},
+
+history: {
+    title:"Riwayat Transaksi",
+    content:`
+        <div class="info-box">
+            <div class="info-label">Penyimpanan</div>
+            <div class="info-value">+$2,000.00</div>
+        </div>
+
+        <div class="info-box">
+            <div class="info-label">Penarikan</div>
+            <div class="info-value">-$500.00</div>
+        </div>
+    `
+},
+
+notification: {
+    title:"Notifikasi",
+    content:`
+        <div class="info-box">
+            <div class="info-label">Notifikasi</div>
+            <div class="info-value">Aktif</div>
+        </div>
+    `
+},
+
+language: {
+    title:"Bahasa",
+    content:`
+        <div class="info-box">
+            <div class="info-label">Bahasa Saat Ini</div>
+            <div class="info-value">Bahasa Indonesia</div>
+        </div>
+    `
+}
+
+};
+
+
+function openMenu(type){
+
+    const data = menuData[type];
+
+    document.getElementById("modalTitle").innerHTML =
+        data.title;
+
+    document.getElementById("modalContent").innerHTML =
+        data.content;
+
+    document.getElementById("modal").style.display =
+        "flex";
+
+}
+
+
+function closeMenu(){
+
+    document.getElementById("modal").style.display =
+        "none";
+
+}
+
+
+function goBack(){
+
+    window.history.back();
+
+}
+
+
+function logout(){
+
+    const confirmLogout =
+        confirm("Apakah Anda yakin ingin keluar dari akun?");
+
+    if(confirmLogout){
+
+        alert("Anda telah keluar dari akun.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Status Penarikan</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    background:#080d14;
+    color:#fff;
+    font-family:Arial,sans-serif;
+    display:flex;
+    justify-content:center;
+}
+
+.page{
+    width:min(100%,400px);
+    min-height:100vh;
+    background:#0e1621;
+}
+
+/* HEADER */
+.header{
+    height:64px;
+    padding:0 16px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    border-bottom:1px solid #253140;
+}
+
+.back{
+    width:36px;
+    height:36px;
+    border:0;
+    border-radius:9px;
+    background:#192533;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.header-title{
+    font-size:18px;
+    font-weight:700;
+}
+
+/* CONTENT */
+.content{
+    padding:28px 18px;
+}
+
+/* WARNING */
+.warning{
+    text-align:center;
+    padding:20px 0 25px;
+}
+
+.warning-icon{
+    width:76px;
+    height:76px;
+    margin:auto;
+    border-radius:50%;
+    background:#3a2025;
+    border:1px solid #71323d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#ff6474;
+    font-size:35px;
+    font-weight:700;
+}
+
+.warning-title{
+    margin-top:20px;
+    font-size:21px;
+    font-weight:800;
+}
+
+.warning-subtitle{
+    margin-top:9px;
+    color:#8794a5;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* CARD */
+.card{
+    margin-top:10px;
+    background:#131e2a;
+    border:1px solid #293747;
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.card-title{
+    padding:15px;
+    color:#8996a7;
+    font-size:11px;
+    font-weight:700;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:14px 15px;
+    border-top:1px solid #222e3c;
+}
+
+.label{
+    color:#7d8999;
+    font-size:12px;
+}
+
+.value{
+    font-size:12px;
+    font-weight:600;
+    text-align:right;
+    word-break:break-word;
+}
+
+.cancelled{
+    color:#ff6474;
+}
+
+/* REALTIME */
+.realtime{
+    color:#19d39c;
+    font-size:10px;
+    margin-left:5px;
+}
+
+/* MESSAGE */
+.message{
+    margin-top:14px;
+    padding:15px;
+    border-radius:12px;
+    background:#24171b;
+    border:1px solid #4d2931;
+    color:#c7a3a8;
+    font-size:12px;
+    line-height:1.6;
+}
+
+/* BUTTON */
+.button{
+    width:100%;
+    height:48px;
+    margin-top:20px;
+    border:0;
+    border-radius:10px;
+    background:#192735;
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.button:active{
+    transform:scale(.99);
+}
+
+/* DESKTOP */
+@media(min-width:401px){
+
+    .page{
+        width:100%;
+        max-width:1200px;
+    }
+
+    .content{
+        width:500px;
+        max-width:100%;
+        margin:auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <button class="back" onclick="goBack()">
+            ←
+        </button>
+
+        <div class="header-title">
+            Status Penarikan
+        </div>
+
+    </header>
+
+
+    <main class="content">
+
+        <!-- WARNING -->
+        <section class="warning">
+
+            <div class="warning-icon">
+                !
+            </div>
+
+            <div class="warning-title">
+                Penarikan Dibatalkan
+            </div>
+
+            <div class="warning-subtitle">
+                Penarikan saldo tidak dapat diproses
+                karena terjadi kesalahan pada permintaan.
+            </div>
+
+        </section>
+
+
+        <!-- DETAIL -->
+        <section class="card">
+
+            <div class="card-title">
+                DETAIL TRANSAKSI
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+                    Status
+                </div>
+
+                <div class="value cancelled">
+                    Dibatalkan
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+                    Jumlah
+                </div>
+
+                <div class="value">
+                    $500.00
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+                    Metode
+                </div>
+
+                <div class="value">
+                    Bank Transfer
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+                    ID Transaksi
+                </div>
+
+                <div class="value" id="transactionId">
+                    Memuat...
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+                    Waktu
+                </div>
+
+                <div class="value">
+
+                    <span id="transactionDate">
+                        Memuat...
+                    </span>
+
+                    <span class="realtime">
+                        ● LIVE
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MESSAGE -->
+        <div class="message">
+
+            Permintaan penarikan telah dibatalkan.
+            Silakan periksa kembali informasi penarikan
+            atau hubungi dukungan apabila Anda membutuhkan
+            bantuan.
+
+        </div>
+
+
+        <button class="button" onclick="goBack()">
+            KEMBALI KE AKUN
+        </button>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/*
+=========================================
+TRANSACTION ID
+=========================================
+*/
+
+function generateTransactionId(){
+
+    const now = new Date();
+
+    const date =
+        now.getFullYear() +
+        String(now.getMonth() + 1).padStart(2,"0") +
+        String(now.getDate()).padStart(2,"0");
+
+    const random =
+        Math.floor(100000 + Math.random() * 900000);
+
+    return `WD-${date}-${random}`;
+}
+
+
+/*
+=========================================
+AMBIL / BUAT ID TRANSAKSI
+=========================================
+*/
+
+function getTransactionId(){
+
+    let transactionId =
+        localStorage.getItem("withdrawalTransactionId");
+
+    if(!transactionId){
+
+        transactionId =
+            generateTransactionId();
+
+        localStorage.setItem(
+            "withdrawalTransactionId",
+            transactionId
+        );
+    }
+
+    return transactionId;
+}
+
+
+/*
+=========================================
+UPDATE WAKTU REALTIME
+=========================================
+*/
+
+function updateRealtime(){
+
+    const now = new Date();
+
+    const formatted =
+        new Intl.DateTimeFormat("id-ID",{
+
+            day:"2-digit",
+            month:"long",
+            year:"numeric",
+
+            hour:"2-digit",
+            minute:"2-digit",
+            second:"2-digit",
+
+            hour12:false
+
+        }).format(now);
+
+    document.getElementById(
+        "transactionDate"
+    ).textContent = formatted;
+}
+
+
+/*
+=========================================
+INITIALIZE
+=========================================
+*/
+
+document.getElementById(
+    "transactionId"
+).textContent = getTransactionId();
+
+updateRealtime();
+
+
+/*
+=========================================
+UPDATE SETIAP 1 DETIK
+=========================================
+*/
+
+setInterval(updateRealtime,1000);
+
+
+/*
+=========================================
+BACK
+=========================================
+*/
+
+function goBack(){
+
+    if(history.length > 1){
+
+        history.back();
+
+    }else{
+
+        window.location.href =
+            "dashboard.html";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login Error - FinTrade</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+    background: #080d14;
+    color: #ffffff;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px;
+}
+
+/* MAIN */
+.error-page {
+    width: min(100%, 400px);
+}
+
+/* LOGO */
+.logo {
+    text-align: center;
+    font-size: 27px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.logo span {
+    color: #19d39c;
+}
+
+.subtitle {
+    text-align: center;
+    color: #758294;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+/* CARD */
+.error-card {
+    padding: 25px 20px;
+    border-radius: 18px;
+    background: #111a25;
+    border: 1px solid #293747;
+    text-align: center;
+}
+
+/* ICON */
+.error-icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #321d23;
+    border: 1px solid #69323d;
+
+    color: #ff6474;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+/* TEXT */
+.error-title {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.error-description {
+    margin-top: 10px;
+    color: #8794a5;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ERROR BOX */
+.error-message {
+    margin-top: 20px;
+    padding: 13px;
+
+    border-radius: 10px;
+
+    background: #21171b;
+    border: 1px solid #4b2931;
+
+    color: #d6aeb4;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* BUTTON */
+.retry-button {
+    width: 100%;
+    height: 48px;
+
+    margin-top: 20px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: #19d39c;
+    color: #07120f;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.retry-button:active {
+    transform: scale(.98);
+}
+
+.back-button {
+    width: 100%;
+    height: 45px;
+
+    margin-top: 9px;
+
+    border: 1px solid #293747;
+    border-radius: 10px;
+
+    background: #192533;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+/* SECURITY */
+.security {
+    margin-top: 18px;
+
+    text-align: center;
+
+    color: #536173;
+    font-size: 10px;
+}
+
+/* SMALL SCREEN */
+@media (max-width: 350px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .error-card {
+        padding: 22px 16px;
+    }
+
+    .error-icon {
+        width: 68px;
+        height: 68px;
+        font-size: 30px;
+    }
+
+    .error-title {
+        font-size: 19px;
+    }
+}
+
+/* LARGE SCREEN */
+@media (min-width: 401px) {
+
+    .error-page {
+        width: 400px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="error-page">
+
+    <!-- LOGO -->
+    <div class="logo">
+        FIN<span>TRADE</span>
+    </div>
+
+    <div class="subtitle">
+        Secure Financial Trading Platform
+    </div>
+
+
+    <!-- ERROR CARD -->
+    <div class="error-card">
+
+        <div class="error-icon">
+            !
+        </div>
+
+
+        <div class="error-title">
+            Login Gagal
+        </div>
+
+
+        <div class="error-description">
+            Kami tidak dapat memproses permintaan login
+            Anda saat ini.
+        </div>
+
+
+        <div class="error-message">
+            Username atau password yang dimasukkan
+            tidak valid. Silakan periksa kembali
+            informasi login Anda.
+        </div>
+
+
+        <button
+            class="retry-button"
+            onclick="retryLogin()">
+
+            COBA LOGIN KEMBALI
+
+        </button>
+
+
+        <button
+            class="back-button"
+            onclick="goBack()">
+
+            KEMBALI
+
+        </button>
+
+    </div>
+
+
+    <div class="security">
+        🔒 Secure Login • FinTrade
+    </div>
+
+</div>
+
+
+<script>
+
+function retryLogin() {
+
+    window.location.href = "index.html";
+
+}
+
+
+function goBack() {
+
+    if (history.length > 1) {
+
+        history.back();
+
+    } else {
+
+        window.location.href = "index.html";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
